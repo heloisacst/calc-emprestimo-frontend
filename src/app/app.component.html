@@ -26,37 +26,52 @@
     </div>
 </form>
 
+<div *ngIf="msgErro" class="alert alert-danger">
+  {{ msgErro }}
+</div>
+
 <div class="container">
   <div class="row">
-      <div class="col-12">
-          <table class="table table-bordered">
-              <thead class="thead-dark">
-                  <tr>
-                      <th colspan="3">Empréstimo</th>
-                      <th colspan="2">Parcela</th>
-                      <th colspan="2">Principal</th>
-                      <th colspan="3">Juros</th>
-                  </tr>
-                  <tr>
-                      <th scope="col">Data Competência</th>
-                      <th scope="col">Valor de Empréstimo</th>
-                      <th scope="col">Saldo Devedor</th>
-                      <th scope="col">Consolidada</th>
-                      <th scope="col">Total</th>
-                      <th scope="col">Amortização</th>
-                      <th scope="col">Saldo</th>
-                      <th scope="col">Provisão</th>
-                      <th scope="col">Acumulado</th>
-                      <th scope="col">Pago</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td></td>
-                  </tr>
-              </tbody>
-          </table>
+    <div class="col-12">
+      <div class="table-container">
+        <table class="table table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th colspan="3">Empréstimo</th>
+              <th colspan="2">Parcela</th>
+              <th colspan="2">Principal</th>
+              <th colspan="3">Juros</th>
+            </tr>
+            <tr>
+              <th scope="col">Data Competência</th>
+              <th scope="col">Valor de Empréstimo</th>
+              <th scope="col">Saldo Devedor</th>
+              <th scope="col">Consolidada</th>
+              <th scope="col">Total</th>
+              <th scope="col">Amortização</th>
+              <th scope="col">Saldo</th>
+              <th scope="col">Provisão</th>
+              <th scope="col">Acumulado</th>
+              <th scope="col">Pago</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let emprestimo of dadosEmprestimo">
+              <td data-label="Data Competência">{{ emprestimo.dataCompetencia }}</td>
+              <td data-label="Valor de Empréstimo">R$ 140.000,00</td>
+              <td data-label="Saldo Devedor">{{ emprestimo.saldoDevedor }}</td>
+              <td data-label="Consolidada">{{ emprestimo.consolidado }}</td>
+              <td data-label="Total">{{ emprestimo.total }}</td>
+              <td data-label="Amortização">{{ emprestimo.amortizacao }}</td>
+              <td data-label="Saldo">{{ emprestimo.saldo }}</td>
+              <td data-label="Provisão">{{ emprestimo.valorProvisao }}</td>
+              <td data-label="Acumulado">{{ emprestimo.valorAcumulado }}</td>
+              <td data-label="Pago">{{ emprestimo.valorPago }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+    </div>
   </div>
 </div>
 

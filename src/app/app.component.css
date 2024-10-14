@@ -1,26 +1,45 @@
 h2 {
-  margin: 2rem;
+  margin: 2rem 0;
   font-size: 1.5rem;
 }
 
 form {
-  margin-left: 1rem;
+  margin: 1rem auto;
+  max-width: 100%;
+  width: 100%;
 }
 
 .form-row {
   display: flex;
-  flex-wrap: nowrap;
-  gap: 10px; /* Espaçamento entre os campos */
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .form-row .col-auto {
   flex: 1;
-  min-width: 150px; /* Largura mínima para os campos */
+  min-width: 120px;
+  max-width: 20%;
 }
 
-th {
+.table-container {
+  max-height: 25rem;
+  overflow-y: auto;
+  border: 1px solid #dee2e6;
+  position: relative;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  background-color: rgb(27, 82, 119);
+  color: white;
+  z-index: 1;
   background-color: rgb(27, 82, 119);
   color: white;
   font-size: 0.8rem;
 }
-
