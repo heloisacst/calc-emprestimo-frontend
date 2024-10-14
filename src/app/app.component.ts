@@ -24,6 +24,7 @@ export class AppComponent implements OnInit{
   dataFinal: string = '';
   dataPrimeiroPagamento: string = '';
   valorEmprestimo: number = 0;
+  newValorEmprestimo: string = '';
   taxaJuros: number = 0;
   msgErro: string = '';
 
@@ -40,42 +41,68 @@ export class AppComponent implements OnInit{
       this.dataFinal,
       this.dataPrimeiroPagamento,
       this.valorEmprestimo,
-      this.taxaJuros
+      (this.taxaJuros / 100)
     );
-    console.log(this.body);
+    this.newValorEmprestimo = this.formatarValor(this.valorEmprestimo);
     this.buscarDadosEmprestimo(this.body);
   }
+      buscarDadosEmprestimo(body: String) {
+        this.subscription = this.apiService.postDadosEmprestimo(body).subscribe({
+          next: (data: any[]) => {
+            this.dados = data.map(item => ({
+              ...item,
+              dataCompetencia: this.formatarData(item.dataCompetencia),
+              saldoDevedor: this.formatarValor(item.saldoDevedor),
+              total: this.formatarValor(item.total),
+              amortizacao: this.formatarValor(item.amortizacao),
+              saldo: this.formatarValor(item.saldo),
+              valorProvisao: this.formatarValor(item.valorProvisao),
+              valorAcumulado: this.formatarValor(item.valorAcumulado),
+              valorPago: this.formatarValor(item.valorPago),
+            }));
+            this.dadosEmprestimo = this.dados;
+          },
+          error: (erro) => {
+            console.log(erro);
+          }
+        });
+      }
 
-  buscarDadosEmprestimo(body: String) {
-      this.subscription = this.apiService.postDadosEmprestimo(body).subscribe(
-          {
-            next: (data: any[]) => {
-                this.dados = data;
-                this.dadosEmprestimo = data;
-            },
-            error: (erro) => {
-                    console.log(erro)
-            }
-        }
-      );
-      console.log(this.dados);
-  }
+    formatarValor(valor: number): string {
+      return valor.toFixed(2).replace('.', ',');
+    }
+
+    formatarData(data: string): string {
+      const [ano, mes, dia] = data.split('-').map(Number);
+      return `${String(dia).padStart(2, '0')}/${String(mes).padStart(2, '0')}/${ano}`; // Formatar a data para dd/mm/yyyy
+    }
 
   validarDatas(): boolean {
-    const inicial = new Date(this.dataInicial);
-    const final = new Date(this.dataFinal);
-    const primeiroPagamento = new Date(this.dataPrimeiroPagamento);
+    const [anoInicial, mesInicial, diaInicial] = this.dataInicial.split('-').map(Number);
+    const [anoFinal, mesFinal, diaFinal] = this.dataFinal.split('-').map(Number);
+    const [anoPrimeiroPagamento, mesPrimeiroPagamento, diaPrimeiroPagamento] = this.dataPrimeiroPagamento.split('-').map(Number);
+
+    const inicial = new Date(anoInicial, mesInicial - 1, diaInicial);
+    const final = new Date(anoFinal, mesFinal - 1, diaFinal);
+    const primeiroPagamento = new Date(anoPrimeiroPagamento, mesPrimeiroPagamento - 1, diaPrimeiroPagamento);
 
     if (final <= inicial) {
-        this.msgErro = 'A data final deve ser maior que a data inicial.';
-        return false;
+      this.msgErro = 'A data final deve ser maior que a data inicial.';
+      return false;
     }
     if (primeiroPagamento <= inicial || primeiroPagamento >= final) {
-        this.msgErro = 'A data de primeiro pagamento deve ser maior que a data inicial e menor que a data final.';
-        return false;
+      this.msgErro = 'A data de primeiro pagamento deve ser maior que a data inicial e menor que a data final.';
+      return false;
+    }
+    if (
+      inicial.getMonth() === primeiroPagamento.getMonth() &&
+      inicial.getFullYear() === primeiroPagamento.getFullYear()
+    ) {
+      this.msgErro = 'A data de primeiro pagamento deve ser posterior ao mês da data inicial.';
+      return false;
     }
 
-    this.msgErro= '';
+    this.msgErro = '';
     return true;
   }
 
@@ -83,7 +110,7 @@ export class AppComponent implements OnInit{
     this.dataInicial = '2024-01-01';
     this.dataFinal = '2034-01-01';
     this.valorEmprestimo = 140000;
-    this.taxaJuros = 0.07;
+    this.taxaJuros = 7;
     this.dataPrimeiroPagamento = '2024-02-15';
   }
 

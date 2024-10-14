@@ -58,15 +58,15 @@
           <tbody>
             <tr *ngFor="let emprestimo of dadosEmprestimo">
               <td data-label="Data Competência">{{ emprestimo.dataCompetencia }}</td>
-              <td data-label="Valor de Empréstimo">R$ 140.000,00</td>
-              <td data-label="Saldo Devedor">{{ emprestimo.saldoDevedor }}</td>
+              <td data-label="Valor de Empréstimo">R$ {{newValorEmprestimo}}</td>
+              <td data-label="Saldo Devedor">R$ {{ emprestimo.saldoDevedor }}</td>
               <td data-label="Consolidada">{{ emprestimo.consolidado }}</td>
-              <td data-label="Total">{{ emprestimo.total }}</td>
-              <td data-label="Amortização">{{ emprestimo.amortizacao }}</td>
-              <td data-label="Saldo">{{ emprestimo.saldo }}</td>
-              <td data-label="Provisão">{{ emprestimo.valorProvisao }}</td>
-              <td data-label="Acumulado">{{ emprestimo.valorAcumulado }}</td>
-              <td data-label="Pago">{{ emprestimo.valorPago }}</td>
+              <td data-label="Total">R$ {{ emprestimo.total }}</td>
+              <td data-label="Amortização">R$ {{ emprestimo.amortizacao }}</td>
+              <td data-label="Saldo">R$ {{ emprestimo.saldo }}</td>
+              <td data-label="Provisão">R$ {{ emprestimo.valorProvisao }}</td>
+              <td data-label="Acumulado">R$ {{ emprestimo.valorAcumulado }}</td>
+              <td data-label="Pago">R$ {{ emprestimo.valorPago }}</td>
             </tr>
           </tbody>
         </table>
