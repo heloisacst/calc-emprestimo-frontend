@@ -4,25 +4,25 @@
     <div class="form-row">
         <div class="col-md-2 mb-3">
             <label for="dtInicial">Data Inicial</label>
-            <input type="date" class="form-control" id="dtInicial" name="dtInicial">
+            <input [value]="dataInicial" type="date" class="form-control" id="dtInicial" name="dtInicial" [(ngModel)]="dataInicial">
         </div>
         <div class="col-md-2 mb-3">
             <label for="dtFinal">Data Final</label>
-            <input type="date" class="form-control" id="dtFinal" name="dtFinal">
+            <input type="date" class="form-control" id="dtFinal" name="dtFinal" [(ngModel)]="dataFinal">
         </div>
         <div class="col-md-2 mb-3">
             <label for="dtPrimeiroPagamento">Primeiro Pagamento</label>
-            <input type="date" class="form-control" id="dtPrimeiroPagamento" name="dtPrimeiroPagamento">
+            <input type="date" class="form-control" id="dtPrimeiroPagamento" name="dtPrimeiroPagamento" [(ngModel)]="dataPrimeiroPagamento">
         </div>
         <div class="col-md-3 mb-3">
             <label for="vlrEmprestimo">Valor de Empréstimo</label>
-            <input type="number" class="form-control" id="vlrEmprestimo" name="vlrEmprestimo" step="0.01">
+            <input type="number" class="form-control" id="vlrEmprestimo" name="vlrEmprestimo" step="0.01" [(ngModel)]="valorEmprestimo">
         </div>
         <div class="col-md-2 mb-3">
-            <label for="txJuros">Taxa de Juros</label>
-            <input type="text" class="form-control" id="txJuros" name="txJuros" placeholder="7%">
+            <label for="txJuros">Taxa de Juros (%)</label>
+            <input [value]="taxaJuros" type="text" class="form-control" id="txJuros" name="txJuros" [(ngModel)]="taxaJuros">
         </div>
-        <button type="submit" class="btn btn-primary">Calcular</button>
+        <button (click)="calcularEmprestimo()" type="submit" class="btn btn-primary">Calcular</button>
     </div>
 </form>
 
@@ -52,10 +52,7 @@
               </thead>
               <tbody>
                   <tr>
-                      <td>Conteúdo 1</td>
-                  </tr>
-                  <tr>
-                      <td>Conteúdo 11</td>
+                      <td></td>
                   </tr>
               </tbody>
           </table>
