@@ -1,0 +1,26 @@
+h2 {
+  margin: 2rem;
+  font-size: 1.5rem;
+}
+
+form {
+  margin-left: 1rem;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px; /* Espaçamento entre os campos */
+}
+
+.form-row .col-auto {
+  flex: 1;
+  min-width: 150px; /* Largura mínima para os campos */
+}
+
+th {
+  background-color: rgb(27, 82, 119);
+  color: white;
+  font-size: 0.8rem;
+}
+

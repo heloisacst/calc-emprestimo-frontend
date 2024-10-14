@@ -1,81 +1,66 @@
 <main>
   <h2>Calculadora de Empréstimos</h2>
   <form>
-    <label for="dtInicial">Data Inicial</label>
-    <input type="date" id="dtInicial" name="dtInicial">
+    <div class="form-row">
+        <div class="col-md-2 mb-3">
+            <label for="dtInicial">Data Inicial</label>
+            <input type="date" class="form-control" id="dtInicial" name="dtInicial">
+        </div>
+        <div class="col-md-2 mb-3">
+            <label for="dtFinal">Data Final</label>
+            <input type="date" class="form-control" id="dtFinal" name="dtFinal">
+        </div>
+        <div class="col-md-2 mb-3">
+            <label for="dtPrimeiroPagamento">Primeiro Pagamento</label>
+            <input type="date" class="form-control" id="dtPrimeiroPagamento" name="dtPrimeiroPagamento">
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="vlrEmprestimo">Valor de Empréstimo</label>
+            <input type="number" class="form-control" id="vlrEmprestimo" name="vlrEmprestimo" step="0.01">
+        </div>
+        <div class="col-md-2 mb-3">
+            <label for="txJuros">Taxa de Juros</label>
+            <input type="text" class="form-control" id="txJuros" name="txJuros" placeholder="7%">
+        </div>
+        <button type="submit" class="btn btn-primary">Calcular</button>
+    </div>
+</form>
 
-    <label for="dtFinal">Data Final</label>
-    <input type="date" id="dtInicial" name="dtFinal">
+<div class="container">
+  <div class="row">
+      <div class="col-12">
+          <table class="table table-bordered">
+              <thead class="thead-dark">
+                  <tr>
+                      <th colspan="3">Empréstimo</th>
+                      <th colspan="2">Parcela</th>
+                      <th colspan="2">Principal</th>
+                      <th colspan="3">Juros</th>
+                  </tr>
+                  <tr>
+                      <th scope="col">Data Competência</th>
+                      <th scope="col">Valor de Empréstimo</th>
+                      <th scope="col">Saldo Devedor</th>
+                      <th scope="col">Consolidada</th>
+                      <th scope="col">Total</th>
+                      <th scope="col">Amortização</th>
+                      <th scope="col">Saldo</th>
+                      <th scope="col">Provisão</th>
+                      <th scope="col">Acumulado</th>
+                      <th scope="col">Pago</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>Conteúdo 1</td>
+                  </tr>
+                  <tr>
+                      <td>Conteúdo 11</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
 
-    <label for="dtPrimeiroPagamento">Primeiro Pagamento</label>
-    <input type="date" id="dtPrimeiroPagamento" name="dtPrimeiroPagamento">
-
-    <label for="vlrEmprestimo">Valor Empréstimo</label>
-    <input type="number" id="vlrEmprestimo" name="vlrEmprestimo">
-
-    <label for="txJuros">Taxa de Juros</label>
-    <input type="number" id="txJuros" name="txJuros">
-  </form>
-
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>twitter</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <table class="table">
-    <thead class="thead-light">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>twitter</td>
-      </tr>
-    </tbody>
-  </table>
 </main>
