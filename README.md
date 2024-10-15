@@ -19,12 +19,12 @@ Repositório referente o front-end do desafio técnico da TOTVS.
     npm i bootstrap;
     ```
 3. Execução:
-  Ir para o diretório do projeto
-  ```
-  cd desafio-gesplan
-  ```
-  Iniciar o ambiente através do comando
+    Ir para o diretório do projeto
+    ```
+    cd desafio-gesplan
+    ```
+    Iniciar o ambiente através do comando
     ```
     ng serve
     ```
-    Acessar o ```http://localhost:4200```
+    Acessar no navegador: ```http://localhost:4200```
