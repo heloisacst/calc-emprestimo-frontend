@@ -31,11 +31,7 @@ export class AppComponent implements OnInit{
   constructor(private apiService: BuscaApiService){}
 
   calcularEmprestimo() {
-
-    if (!this.validarDatas()) {
-      return;
-    }
-
+    this.dadosEmprestimo = null;
     this.body = this.apiService.montarBody(
       this.dataInicial,
       this.dataFinal,
@@ -61,9 +57,10 @@ export class AppComponent implements OnInit{
               valorPago: this.formatarValor(item.valorPago),
             }));
             this.dadosEmprestimo = this.dados;
+            this.msgErro = '';
           },
           error: (erro) => {
-            console.log(erro);
+            this.msgErro = erro;
           }
         });
       }
@@ -77,41 +74,15 @@ export class AppComponent implements OnInit{
       return `${String(dia).padStart(2, '0')}/${String(mes).padStart(2, '0')}/${ano}`; // Formatar a data para dd/mm/yyyy
     }
 
-  validarDatas(): boolean {
-    const [anoInicial, mesInicial, diaInicial] = this.dataInicial.split('-').map(Number);
-    const [anoFinal, mesFinal, diaFinal] = this.dataFinal.split('-').map(Number);
-    const [anoPrimeiroPagamento, mesPrimeiroPagamento, diaPrimeiroPagamento] = this.dataPrimeiroPagamento.split('-').map(Number);
-
-    const inicial = new Date(anoInicial, mesInicial - 1, diaInicial);
-    const final = new Date(anoFinal, mesFinal - 1, diaFinal);
-    const primeiroPagamento = new Date(anoPrimeiroPagamento, mesPrimeiroPagamento - 1, diaPrimeiroPagamento);
-
-    if (final <= inicial) {
-      this.msgErro = 'A data final deve ser maior que a data inicial.';
+  habilitaBotao() {
+    if(!this.dataInicial || !this.dataFinal || !this.dataPrimeiroPagamento || !this.taxaJuros || !this.valorEmprestimo) {
       return false;
+    } else {
+      return true;
     }
-    if (primeiroPagamento <= inicial || primeiroPagamento >= final) {
-      this.msgErro = 'A data de primeiro pagamento deve ser maior que a data inicial e menor que a data final.';
-      return false;
-    }
-    if (
-      inicial.getMonth() === primeiroPagamento.getMonth() &&
-      inicial.getFullYear() === primeiroPagamento.getFullYear()
-    ) {
-      this.msgErro = 'A data de primeiro pagamento deve ser posterior ao mês da data inicial.';
-      return false;
-    }
-
-    this.msgErro = '';
-    return true;
   }
 
   ngOnInit(): void {
-    this.dataInicial = '2024-01-01';
-    this.dataFinal = '2034-01-01';
-    this.valorEmprestimo = 140000;
-    this.taxaJuros = 7;
-    this.dataPrimeiroPagamento = '2024-02-15';
   }
 
   ngOnDestroy(): void {

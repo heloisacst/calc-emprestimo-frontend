@@ -14,13 +14,20 @@ body {
 h2 {
   margin: 2rem 0;
   font-size: 1.25rem;
+  margin-left: 1rem;
 }
 
 form {
-  margin: 1rem auto;
-  max-width: 90%;
+  /*margin: 1rem auto;*/
+  max-width: 70%;
   width: 100%;
   padding: 1rem;
+}
+
+.form-fix {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
 }
 
 .form-row {
@@ -33,7 +40,7 @@ form {
 .form-row .col-auto {
   flex: 1;
   min-width: 8rem;
-  max-width: 50%;
+  max-width: 40%;
 }
 
 .form-row label {
@@ -51,6 +58,10 @@ label {
   margin: 0.25rem 0;
 }
 
+label {
+  font-size: 0.8rem;
+}
+
 input {
   width: auto;
   max-width: 100%;
@@ -63,6 +74,10 @@ button {
   padding: 0.5rem 1rem;
   height: auto;
   margin: 0.25rem 0;
+}
+
+.btn btn-secondary btn-lg::hover {
+  cursor: none;
 }
 
 .table-container {
@@ -89,4 +104,9 @@ thead th {
 
 tbody td {
   text-align: center;
+}
+
+#alert {
+  margin-left: 2rem;
+  width: 30%;
 }

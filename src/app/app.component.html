@@ -1,78 +1,86 @@
 <main>
   <h2>Calculadora de Empréstimos</h2>
-  <form>
-    <div class="form-row">
+  <div class="form-fix">
+    <form>
+      <div class="form-row">
         <div class="col-md-2 mb-3">
-            <label for="dtInicial">Data Inicial</label>
-            <input [value]="dataInicial" type="date" class="form-control" id="dtInicial" name="dtInicial" [(ngModel)]="dataInicial">
+          <label for="dtInicial">Data Inicial</label>
+          <input [value]="dataInicial" type="date" class="form-control" id="dtInicial" name="dtInicial"
+            [(ngModel)]="dataInicial">
         </div>
         <div class="col-md-2 mb-3">
-            <label for="dtFinal">Data Final</label>
-            <input type="date" class="form-control" id="dtFinal" name="dtFinal" [(ngModel)]="dataFinal">
+          <label for="dtFinal">Data Final</label>
+          <input type="date" class="form-control" id="dtFinal" name="dtFinal" [(ngModel)]="dataFinal">
         </div>
         <div class="col-md-2 mb-3">
-            <label for="dtPrimeiroPagamento">Primeiro Pagamento</label>
-            <input type="date" class="form-control" id="dtPrimeiroPagamento" name="dtPrimeiroPagamento" [(ngModel)]="dataPrimeiroPagamento">
+          <label for="dtPrimeiroPagamento">Primeiro Pagamento</label>
+          <input type="date" class="form-control" id="dtPrimeiroPagamento" name="dtPrimeiroPagamento"
+            [(ngModel)]="dataPrimeiroPagamento">
         </div>
         <div class="col-md-3 mb-3">
-            <label for="vlrEmprestimo">Valor de Empréstimo</label>
-            <input type="number" class="form-control" id="vlrEmprestimo" name="vlrEmprestimo" step="0.01" [(ngModel)]="valorEmprestimo">
+          <label for="vlrEmprestimo">Valor de Empréstimo</label>
+          <input type="number" class="form-control" id="vlrEmprestimo" name="vlrEmprestimo" step="0.01"
+            [(ngModel)]="valorEmprestimo">
         </div>
         <div class="col-md-2 mb-3">
-            <label for="txJuros">Taxa de Juros (%)</label>
-            <input [value]="taxaJuros" type="text" class="form-control" id="txJuros" name="txJuros" [(ngModel)]="taxaJuros">
+          <label for="txJuros">Taxa de Juros (%)</label>
+          <input [value]="taxaJuros" type="text" class="form-control" id="txJuros" name="txJuros"
+            [(ngModel)]="taxaJuros">
         </div>
-        <button (click)="calcularEmprestimo()" type="submit" class="btn btn-primary">Calcular</button>
-    </div>
-</form>
+      </div>
+    </form>
+    <button (click)="calcularEmprestimo()" type="submit" class="btn btn-primary" [disabled]="!habilitaBotao()">Calcular</button>
+  </div>
 
-<div *ngIf="msgErro" class="alert alert-danger">
-  {{ msgErro }}
-</div>
+  <div *ngIf="msgErro" class="alert alert-danger" id="alert">
+    {{ msgErro }}
+  </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <div class="table-container">
-        <table class="table table-bordered">
-          <thead class="thead-dark">
-            <tr>
-              <th colspan="3">Empréstimo</th>
-              <th colspan="2">Parcela</th>
-              <th colspan="2">Principal</th>
-              <th colspan="3">Juros</th>
-            </tr>
-            <tr>
-              <th scope="col">Data Competência</th>
-              <th scope="col">Valor de Empréstimo</th>
-              <th scope="col">Saldo Devedor</th>
-              <th scope="col">Consolidada</th>
-              <th scope="col">Total</th>
-              <th scope="col">Amortização</th>
-              <th scope="col">Saldo</th>
-              <th scope="col">Provisão</th>
-              <th scope="col">Acumulado</th>
-              <th scope="col">Pago</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let emprestimo of dadosEmprestimo">
-              <td data-label="Data Competência">{{ emprestimo.dataCompetencia }}</td>
-              <td data-label="Valor de Empréstimo">R$ {{newValorEmprestimo}}</td>
-              <td data-label="Saldo Devedor">R$ {{ emprestimo.saldoDevedor }}</td>
-              <td data-label="Consolidada">{{ emprestimo.consolidado }}</td>
-              <td data-label="Total">R$ {{ emprestimo.total }}</td>
-              <td data-label="Amortização">R$ {{ emprestimo.amortizacao }}</td>
-              <td data-label="Saldo">R$ {{ emprestimo.saldo }}</td>
-              <td data-label="Provisão">R$ {{ emprestimo.valorProvisao }}</td>
-              <td data-label="Acumulado">R$ {{ emprestimo.valorAcumulado }}</td>
-              <td data-label="Pago">R$ {{ emprestimo.valorPago }}</td>
-            </tr>
-          </tbody>
-        </table>
+  <div class="container" *ngIf="dadosEmprestimo">
+    <div class="row">
+      <div class="col-12">
+        <div class="table-container">
+          <table class="table table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th colspan="3">Empréstimo</th>
+                <th colspan="2">Parcela</th>
+                <th colspan="2">Principal</th>
+                <th colspan="3">Juros</th>
+              </tr>
+              <tr>
+                <th scope="col">Data Competência</th>
+                <th scope="col">Valor de Empréstimo</th>
+                <th scope="col">Saldo Devedor</th>
+                <th scope="col">Consolidada</th>
+                <th scope="col">Total</th>
+                <th scope="col">Amortização</th>
+                <th scope="col">Saldo</th>
+                <th scope="col">Provisão</th>
+                <th scope="col">Acumulado</th>
+                <th scope="col">Pago</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let emprestimo of dadosEmprestimo; let i = index">
+                <td data-label="Data Competência">{{ emprestimo.dataCompetencia }}</td>
+                <td data-label="Valor de Empréstimo">
+                  R$ {{ i === 0 ? newValorEmprestimo : '0,00' }}
+                </td>
+                <td data-label="Saldo Devedor">R$ {{ emprestimo.saldoDevedor }}</td>
+                <td data-label="Consolidada">{{ emprestimo.consolidado }}</td>
+                <td data-label="Total">R$ {{ emprestimo.total }}</td>
+                <td data-label="Amortização">R$ {{ emprestimo.amortizacao }}</td>
+                <td data-label="Saldo">R$ {{ emprestimo.saldo }}</td>
+                <td data-label="Provisão">R$ {{ emprestimo.valorProvisao }}</td>
+                <td data-label="Acumulado">R$ {{ emprestimo.valorAcumulado }}</td>
+                <td data-label="Pago">R$ {{ emprestimo.valorPago }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 </main>
