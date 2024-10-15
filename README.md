@@ -6,6 +6,7 @@ Repositório referente o front-end do desafio técnico da TOTVS.
 
 - Node.js e npm instalados
 - Angular CLI
+- Servidor do back-end em execução
 
 ## Instalação
 
@@ -16,12 +17,11 @@ Repositório referente o front-end do desafio técnico da TOTVS.
 2. Instale as dependências:
     ```
     npm install
-    npm i bootstrap;
     ```
 3. Execução:
     Ir para o diretório do projeto
     ```
-    cd desafio-gesplan
+    cd calc-emprestimo-frontend
     ```
     Iniciar o ambiente através do comando
     ```
